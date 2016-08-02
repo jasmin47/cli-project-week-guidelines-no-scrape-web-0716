@@ -1,7 +1,7 @@
-class ExampleCLI
+class CLI
 
   def call
-    puts "Welcome, what Twitter search word should I use?"
+    puts "Welcome! Type 'help' for menu."
     run
   end
     
@@ -10,7 +10,7 @@ class ExampleCLI
   end
 
   def run
-    print "New search keyword: "
+    print "Type in the zipcode to view water quality complaints: "
     input = get_user_input
     if input == "help"
       help
@@ -23,19 +23,22 @@ class ExampleCLI
   end
 
   def search(input)
-    search_term = input.split(" ")[0]
+    search_term = input
     puts "Your search term was #{search_term}, I am searching..."
-    url = "https://twitter.com/search?q=#{search_term}&src=typd&f=realtime"
-    tweet = ExampleScraper.new(url).example_method.sample
-    puts "Thank you for your patience. I found this on Twitter:"
-    puts tweet.example
+    url = 'http://data.cityofnewyork.us/resource/qfe3-6dkn.json'
+    descriptions = ExampleClass.new(url).example_method.sample
+    local_addresses = ExampleClass.new(url).example_method.sample
+    puts "Thank you for your patience. I found this on NYC Open Data:"
+    puts ##????
   end
 
   def help
     puts "Type 'exit' to exit"
     puts "Type 'help' to view this menu again"
-    puts "Type anything else to search for a Tweet"
+    puts "Type anything else to input your search"
   end
 
 end
 
+# WaterQualityData.new
+# WaterQualityData.get_descriptor(zipcode)

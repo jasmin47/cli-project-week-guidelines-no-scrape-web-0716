@@ -1,23 +1,36 @@
-class SpotifyChart
+require 'rest-client'
+require 'json'
 
-  attr_reader :url, :music_data
+class WaterQualityGetter
 
-  # example url:
-  # "http://charts.spotify.com/api/tracks/most_streamed/us/weekly/latest"
+  attr_reader :url, :water_data 
+
   
-  def initialize(url)
-    @url = url
-    @music_data = JSON.load(open(url))
+  def initialize
+    @url = 'http://data.cityofnewyork.us/resource/qfe3-6dkn.json'
+    @water_data = JSON.load(open(url))
   end
 
-  def make_songs
-    songs = []
-    all_songs = music_data["tracks"]
-    all_songs.each do |song|
-      song_url = song["track_url"]
-      songs << ExampleModel.new(song_url)
-    end
-    songs
+  def get_descriptor
+    descriptors = []
+     @water_data.each{|complaint| 
+      if complaint["incident_zip"] == ####
+      descriptors << complaint["descriptor"]
+      end
+    }
+  end
+
+    def get_address
+    addresses = []
+     @water_data.each{|complaint| 
+      if complaint["incident_zip"] == ####
+      descriptors << complaint["incident_address"]
+      end
+    }
   end
 
 end
+
+
+
+
